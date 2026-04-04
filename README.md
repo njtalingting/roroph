@@ -1,7 +1,7 @@
 # roroph: Roll-on/Roll-Off (RoRo) Connectivity and Transport Data
 
 ## Overview
-The `roroph` package provides a standardized, machine-readable geospatial dataset of the 108 primary and missionary routes comprising the Philippine Nautical Highway System. It is designed to serve as 2025–2026 Structural Baseline for spatial data science, regional science, and transport logistics analysis.
+The `roroph` package provides a standardized, machine-readable geospatial dataset of the 108 primary and missionary routes comprising the Philippine Nautical Highway System. It is designed to serve as 2025–2026 Structural Baseline for spatial data science, regional science, and transport logistics analysis. While the topology remains a stationary reference, the attribute data serves as the validated benchmark for longitudinal comparative studies.
 
 Unlike traditional distance-based spatial models, `roroph` treats the Philippine archipelago as a living network. It provides the necessary edge-list and node-attribute data to move beyond simple Euclidean distance ($d$) and into Frictional Connectivity, accounting for:
 
