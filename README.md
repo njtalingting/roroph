@@ -14,7 +14,7 @@ Unlike traditional distance-based spatial models, `roroph` treats the Philippine
 By focusing on Network Topology rather than a Coordinate Grid, `roroph` provides the stationary infrastructure layer required for modeling Signal Propagation (e.g., price transmission, viral spread, or supply chain shocks) across the Philippine archipelago.
 
 ## The Frequency-Based Approach
-While `roroph` provides the raw infrastructure (the Edges), the Spatial Weighting (W) should be constructed using the `ArchipelagoEngine` (v0.1.2+) methodology. In an archipelagic context, Euclidean distance often results in Omitted Variable Bias because it ignores the physical constraints of the water. For the most rigorous results, users are encouraged to build Frequency-Weighted Matrices where the "nearness" of two provinces is defined by the bandwidth of their maritime connection ($f$).
+While `roroph` provides the raw infrastructure (the Edges), the Spatial Weighting ($W$) should be constructed using the `ArchipelagoEngine` (v0.1.2+) methodology. In an archipelagic context, Euclidean distance often results in Omitted Variable Bias because it ignores the physical constraints of the water. For the most rigorous results, users are encouraged to build Frequency-Weighted Matrices ( provided by `ArchipelagoEngine` on CRAN) where the nearness of two provinces is defined by the bandwidth of their maritime connection ($f$).
 
 ## Installation
 For the development version:
