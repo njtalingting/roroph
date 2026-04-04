@@ -11,6 +11,8 @@ Unlike traditional distance-based spatial models, `roroph` treats the Philippine
 
 **Flow Capacity:** Daily frequency ($f$), passenger capacity, and cargo volume.
 
+By focusing on network topology and operational capacity, `roroph` provides the stationary infrastructure layer required for modeling the flow of diverse commodities across the Philippine archipelago.
+
 ## Installation
 For the development version:
 ```
