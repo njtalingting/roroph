@@ -18,7 +18,7 @@ For the development version:
 devtools::install_github("njtalingting/roroph")
 
 ## Applications
-This package is built to integrate seamlessly with ArchipelagoEngine. Use roroph to construct custom **Spatial Weight Matrices ($W$)** based on maritime frequency rather than just 
+This package is built to integrate seamlessly with ArchipelagoEngine. Use roroph to construct custom Spatial Weight Matrices (W) based on maritime frequency rather than just 
 contiguity.
 
 library(roroph)
