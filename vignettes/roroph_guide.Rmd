@@ -1,0 +1,242 @@
+---
+title: "Visualizing Philippine Roll-on/Roll-off 'RoRo' Connectivity with roroph"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Visualizing Philippine RoRo Connectivity with roroph}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r dependencies, include=FALSE}
+# Internal knitr settings
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+#Only execute the map if all dependencies are present
+vignette_deps <- c("rnaturalearth", "rnaturalearthdata", "sf", 
+                   "ggrepel", "dplyr", "ggspatial", "ggplot2")
+all_present <- all(sapply(vignette_deps, requireNamespace, quietly = TRUE))
+knitr::opts_chunk$set(eval = all_present)
+```
+
+The `roroph` package provides standardized data for the Philippine Nautical Highway. This guide shows how to map the 108 bidirectional links to visualize regional connectivity within the Philippines.
+
+# Setup
+
+We will use `ggplot2` for plotting and `sf` for spatial handling.
+
+```{r setup, message = FALSE, warning = FALSE}
+library(roroph)       
+library(rnaturalearth) 
+library(sf)
+library(ggrepel)
+library(dplyr)
+library(ggspatial)
+library(ggplot2)
+
+# Load the dataset
+data("roro_routes")
+
+# Load the dataset
+data("roro_routes")
+```
+
+# Mapping the Network
+
+We can visualize the RoRo links as segments connecting provincial capitals. We'll color-code them by their MARINA Highway classification (Western, Central, Eastern, or Missionary).
+
+```{r map-network, warning= FALSE}
+
+# 1. Required Libraries
+library(roroph)
+library(rnaturalearth)
+library(sf)
+library(ggrepel)
+library(dplyr)
+library(ggspatial)
+
+# 2. Data Preparation
+ph_land <- ne_countries(scale = "medium", country = "Philippines", returnclass = "sf")
+
+# Pre-calculate viz data once to avoid redundant grepl/mutates in the plot call
+roro_viz <- roro_routes %>%
+  mutate(
+    highway_type = case_when(
+      grepl("WNH", marina_code) ~ "Western",
+      grepl("CNH", marina_code) ~ "Central",
+      grepl("ENH", marina_code) ~ "Eastern",
+      grepl("MR", marina_code)  ~ "Missionary",
+      TRUE ~ "Other"
+    ),
+    highway_type = factor(highway_type, levels = c("Western", "Central", "Eastern", "Missionary"))
+  )
+
+# Optimized Hub Identification: Calculate distinct nodes and hubs in one pipeline
+province_nodes <- roro_viz %>%
+  group_by(from_prov) %>%
+  summarise(
+    total_freq = sum(freq_daily, na.rm = TRUE),
+    lon = first(from_lon),
+    lat = first(from_lat),
+    .groups = "drop"
+  )
+
+# Identify Top 15 hubs + Batanes (Conditional logic inside slice to keep it pipe-friendly)
+hubs_to_label <- province_nodes %>%
+  arrange(desc(total_freq)) %>%
+  slice(unique(c(1:15, which(from_prov == "Batanes"))))
+
+# 3. High-Fidelity Plot Execution
+ggplot() +
+  # Layer 0: Global Background & Landmass
+  geom_sf(data = ph_land, fill = "#ffffff", color = "#d1d8e0", linewidth = 0.3) +
+  
+  # Layer 1: RoRo Network Edges (Ordered by frequency so high-freq stays on top)
+  geom_segment(data = roro_viz %>% arrange(freq_daily), 
+               aes(x = from_lon, y = from_lat, 
+                   xend = to_lon, yend = to_lat, 
+                   color = highway_type,
+                   linewidth = freq_daily), 
+               alpha = 0.85, lineend = "round") +
+  
+  # Layer 2: Province Nodes (Using the pre-summarized province_nodes)
+  geom_point(data = province_nodes, 
+             aes(x = lon, y = lat), 
+             color = "#2c3e50", size = 0.6) +
+  
+  # Layer 3: Strategic Labels (Enhanced repellent parameters)
+  geom_text_repel(data = hubs_to_label, 
+                  aes(x = lon, y = lat, label = from_prov),
+                  size = 2.4, color = "#2f3542", fontface = "bold.italic",
+                  box.padding = 0.8, point.padding = 0.5,
+                  segment.color = '#bdc3c7', segment.alpha = 0.5,
+                  max.overlaps = 20, force = 2) +
+  
+  # Professional Scales
+  scale_linewidth_continuous(range = c(0.4, 2.5), breaks = c(5, 15, 30, 45), name = "TRIPS / DAY") +
+  scale_color_manual(values = c("Western" = "#1e90ff", "Central" = "#2ed573", 
+                                "Eastern" = "#ff7f50", "Missionary" = "#a4b0be"), 
+                     name = "HIGHWAY SYSTEM") +
+  
+  # Cartographic Elements
+  annotation_scale(location = "bl", width_hint = 0.15, text_size = 7) +
+  annotation_north_arrow(location = "bl", which_north = "true", 
+                         pad_x = unit(0.2, "in"), pad_y = unit(0.4, "in"),
+                         style = north_arrow_minimal(text_size = 6)) +
+  # --- Refined Theme & Unified HUD (West Philippine Sea Positioning) ---
+  theme_minimal(base_family = "sans") +
+  theme(
+    plot.title    = element_text(face = "bold", size = 16, color = "#2c3e50", hjust = 0.5),
+    plot.subtitle = element_text(size = 10, color = "#7f8c8d", hjust = 0.5, margin = margin(b = 10)),
+    plot.caption  = element_text(size = 7, color = "#95a5a6", hjust = 0.5, margin = margin(t = 20)),
+    
+    # POSITIONING: Pinned to top-left sea area
+    legend.position      = c(0.02, 0.98),
+    legend.justification = c("left", "top"),
+    legend.direction     = "vertical",
+    legend.box           = "vertical",
+    legend.box.just      = "left",
+    
+    # THE "EQUAL BOX" LOGIC
+    legend.background = element_rect(fill = alpha("white", 0.8), color = "#bdc3c7", linewidth = 0.1),
+    legend.margin     = margin(4, 6, 4, 6),
+    legend.spacing.y  = unit(0.05, "cm"),
+    
+    # ULTRA-COMPACT SCALING
+    legend.key.width  = unit(0.5, "cm"),   
+    legend.key.height = unit(0.25, "cm"),
+    legend.title      = element_text(size = 5.5, face = "bold"),
+    legend.text       = element_text(size = 5),
+    
+    # CANVAS CLEANUP
+    panel.grid      = element_blank(),
+    axis.text       = element_blank(),
+    axis.title      = element_blank(),
+    panel.background = element_rect(fill = "#f1f2f6", color = NA),
+    plot.background  = element_rect(fill = "#f1f2f6", color = NA)
+  ) +
+  
+  labs(
+    title    = "NATIONAL PHILIPPINE MARITIME ROUTE",
+    subtitle = "Spatial Connectivity and Daily Frequency of the PH RoRo Network",
+    caption  = "roroph package | Data: MARINA & PPA (2026) | Dev: NJ Talingting"
+  ) +
+  
+  # PRECISE ARC MAP FRAMING
+  coord_sf(xlim = c(116.5, 127.5), ylim = c(4.5, 21.5), expand = FALSE)
+```
+
+# Transport Analysis: Capacity vs. Distance
+
+Beyond mapping, we can analyze the relationship between distance and vessel capacity.
+
+```{r analysis, warning= FALSE}
+# --- Analysis Plot with Integrated Professional Verdict ---
+ggplot(roro_routes, aes(x = dist_nm, y = pax_cap, color = from_region)) +
+  # Use jitter to reveal density at standard vessel classes (e.g., 300 pax)
+  geom_jitter(size = 2.2, alpha = 0.5, width = 1.5, height = 5) +
+  
+  # LOESS capture regional non-linearities (The "Maritime Reality" Curve)
+  geom_smooth(method = "loess", se = TRUE, alpha = 0.1, linewidth = 1) +
+  
+  # Regional Palette
+  scale_color_manual(values = c("Luzon" = "#e74c3c", "Visayas" = "#3498db", "Mindanao" = "#2ecc71"), 
+                     name = "Origin Region") +
+  
+  # Metadata and the Verdict
+  labs(
+    title = "REGIONAL MARITIME CAPACITY SCALING",
+    subtitle = "Vessel Capacity (Pax) vs. Nautical Distance across the Philippine Archipelago",
+    x = "Route Distance (Nautical Miles)",
+    y = "Passenger Capacity per Trip",
+    # YOUR VERDICT INTEGRATED HERE:
+    caption = paste0(
+      "Source: roroph 0.1.0 | dev: NJ Talingting |2026 Simulation Framework"
+    )
+  ) +
+  
+  # Professional Science Theme
+  theme_minimal(base_size = 11) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, color = "#2c3e50"),
+    plot.subtitle = element_text(size = 10, color = "#7f8c8d", margin = margin(b = 15)),
+    
+    # Verdict Styling
+    plot.caption = element_text(size = 8.5, color = "#34495e", hjust = 0, lineheight = 1.2, margin = margin(t = 20)),
+    
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.title = element_text(face = "bold"),
+    axis.title = element_text(face = "bold", size = 9)
+  )
+```
+
+## Interpretation
+
+This plot is a high-fidelity representation of *Spatial Heterogeneity*. It proves that a 'one-size-fits-all' model for the whole Philippines would not fully capture the differing maritime logistic of its provinces. By splitting it by region, we demonstrate that maritime capacity is a function of regional geography, not just linear physics.
+
+## Conclusion
+
+The `roroph` package serves as a foundational tool for understanding the spatial architecture of the Philippine maritime network. By providing standardized GADM-compliant provincial links alongside critical transport metrics, it enables researchers to:
+
+Identify **logistical bottlenecks** within the National Nautical Highway.
+
+Model **regional accessibility** for economic development studies.
+
+Simulate **disaster-response scenarios** by identifying alternative inter-island routes.
+
+As the first R-native dataset for this domain, `roroph` bridges the gap between raw administrative records and high-fidelity spatial analysis.
+
+## Disclaimer
+
+**Data Currency and Accuracy:** The maritime industry in the Philippines is highly dynamic. While the routes, distances, and MARINA codes in this package are based on official 2024–2026 administrative reports from the **Maritime Industry Authority (MARINA)** and the **Philippine Ports Authority (PPA)**, users should note:
+
+1.  **Operational Status:** Routes may be temporarily suspended due to weather (e.g., tropical cyclones), maintenance, or regulatory grounding of specific fleets.
+
+2.  **Variable Metrics:** Values for `freq_daily` (frequency) and `pax_cap` (capacity) are representative averages. Actual daily throughput fluctuates based on seasonal demand (e.g., Holy Week, Christmas) and private operator schedules.
+
+3.  **Navigational Use:** This dataset is for **statistical and spatial modeling purposes only**. It is **NOT** intended for actual marine navigation. Always consult official Notices to Mariners (NOTAMs) and PPA port advisories for real-time travel planning.
+
+**User Responsibility:** Users are encouraged to verify critical data points against the latest [MARINA sectoral releases](https://marina.gov.ph) when using this package for policy-making, logistics planning, among other academic and commercial usage.
