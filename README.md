@@ -27,7 +27,7 @@ Unlike traditional distance-based spatial models, `roroph` sees the Philippine a
 <p align="center">
   <img src="man/figures/analysis.png" width="100%">
   <br>
-  <i><b>Figure 1:</b> The relationship between distance and vessel capacity in the Philippines' major island groups.</i>
+  <i><b>Figure 2:</b> The relationship between distance and vessel capacity in the Philippines' major island groups.</i>
 </p>
 
 **The Frequency-Based Weights ($W$):** `roroph` provides the raw infrastructure (the Edges) and the native functions to construct Frequency-Weighted Matrices ($W$). In an archipelagic context, Euclidean distance ($d_{ij}$) becomes a limitation as it ignores the physical constraints of the ocean that moves the Philippine economy. By defining the "nearness" of two provinces by the bandwidth of their maritime connection ($f$), `roroph` enables researchers to capture the spatial signal found in national price transmission.
