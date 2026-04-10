@@ -54,11 +54,11 @@ roro_routes %>%
   group_by(highway_type) %>%
   summarise(mean_pax = mean(pax_cap, na.rm = TRUE))
 
-# Example 2: Spatial Weight Construction via Actual Maritime RoRo Route
+# Example 2: Zoom in to one of the provincial links
 # Filter for the Western Nautical Highway (WNH) hubs
 wnh_hubs <- roro_routes[roro_routes$highway_type == "Western", ]
 
-# Simple validation check of coordinates for spatial weight construction
+# Simple validation check of coordinates 
 if (requireNamespace("sf", quietly = TRUE)) {
 
 # Check if coordinates are within the Philippine bounding box
