@@ -14,7 +14,7 @@ Unlike traditional distance-based spatial models, `roroph` sees the Philippine a
 **Flow Capacity:** Daily frequency ($f$), passenger capacity, and cargo volume.
 
 ## Key Features
-**Mapping the Core Philippine Maritime Network:** We can visualize the RoRo links as segments connecting provincial capitals. We can color-code them by their MARINA Highway classification (Western, Central, Eastern, or Missionary).
+**Mapping the Core Philippine Maritime Network:** We can visualize the RoRo links as segments connecting provincial capitals. We can color-code them by their MARINA Highway classification (Western, Central, Eastern, or Missionary) through which the strength of connection is determined by daily frequency travel.
 
 <p align="center">
   <img src="man/figures/roromap.png" width="40%">
