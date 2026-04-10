@@ -22,7 +22,7 @@ Unlike traditional distance-based spatial models, `roroph` sees the Philippine a
   <i><b>Figure 1:</b> Spatial Connectivity and Daily Frequency of the Philippine RoRo Maritime Network</i>
 </p>
 
-**Statistical Analysis** Beyond visualization, we can use `roroph` for statistical analyses as it provides necessary variables such as distance, travel time,  and vessel frequency within the 2024-2026 operations. For instance, we could analyze the relationship between distance and vessel capacity among the three major island groups in the Philippines.
+**Statistical Analysis:** Beyond visualization, we can use `roroph` for statistical analyses as it provides necessary variables such as distance, travel time,  and vessel frequency within the 2024-2026 operations. For instance, we could analyze the relationship between distance and vessel capacity among the three major island groups in the Philippines.
 
 <p align="center">
   <img src="man/figures/analysis.png" width="100%">
@@ -30,7 +30,7 @@ Unlike traditional distance-based spatial models, `roroph` sees the Philippine a
   <i><b>Figure 2:</b> The relationship between distance and vessel capacity in the Philippines' major island groups.</i>
 </p>
 
-**The Frequency-Based Weights ($W$):** `roroph` provides the raw infrastructure (the Edges) and the native functions to construct Frequency-Weighted Matrices ($W$). In an archipelagic context, Euclidean distance ($d_{ij}$) becomes a limitation as it ignores the physical constraints of the ocean that moves the Philippine economy. By defining the "nearness" of two provinces by the bandwidth of their maritime connection ($f$), `roroph` enables researchers to capture the spatial signal found in national price transmission.
+**Construction of the Frequency-Based Weights ($W$):** `roroph` provides the raw infrastructure (the Edges) and the native functions to construct Frequency-Weighted Matrices ($W$). In an archipelagic context, Euclidean distance ($d_{ij}$) becomes a limitation as it ignores the physical constraints of the ocean that moves the Philippine economy. By defining the "nearness" of two provinces by the bandwidth of their maritime connection ($f$), `roroph` enables researchers to capture the spatial signal found in national price transmission.
 
 While `roroph` defines the Spatial Weights ($W$), it is designed to be the primary data-input for the `ArchipelagoEngine` (v0.1.2) package. The engine utilizes these maritime weights to perform Maximum Likelihood Estimation, correcting for the residual spatial bias ($p < 0.05$) often found in terminal nodes and land-border clusters.
 
