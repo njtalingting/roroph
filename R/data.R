@@ -1,7 +1,6 @@
 #' @import dplyr
 #' @import sf
 #' @import spdep
-#' @import ArchipelagoEngine
 #' @importFrom ggplot2 ggplot aes geom_line
 NULL
 
