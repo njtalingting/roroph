@@ -1,6 +1,6 @@
 Package: roroph
 Title: Philippine Roll-on/Roll-Off (RoRo) Connectivity and Transport Data
-Version: 0.1.2.999
+Version: 0.1.2.9999
 Authors@R: 
     person("NJ", "Talingting", 
            email = "ninotalingting77@gmail.com", 
@@ -32,7 +32,6 @@ Imports:
     ggplot2,
     sf,
     spdep,
-    vctrs,
     rlang,
     magrittr
 Suggests: 
