@@ -2,7 +2,7 @@
 
 # roroph: Philippine Roll-on/Roll-Off (RoRo) Connectivity and Transport Data
 
-> Maintainer's Note: `roroph` v0.1.1 only covers the 2024-2026 operational data from MARINA and PPA. However, the maintainer is active in updating the dataset. If you know newly-established inter-island RoRos in the succeeding years, please submit an issue [here.](https://github.com/njtalingting/roroph/issues)
+> *Maintainer's Note: `roroph` v0.1.1 only covers the 2024-2026 operational data from MARINA and PPA. However, the maintainer is active in updating the dataset. If you know newly-established inter-island RoRos in the succeeding years, please submit an issue [here.](https://github.com/njtalingting/roroph/issues)*
 
 ## Overview
 The `roroph` package provides a standardized, machine-readable geospatial dataset of the primary and missionary routes comprising the Philippine Nautical Highway System. This includes 108 bidirectional provincial links across the Western, Central, and  Eastern Nautical Highways, complete with GADM-standardized naming,  geospatial coordinates, and metrics such as distance, travel time,  and vessel frequency within the 2024-2026 operations.
