@@ -2,8 +2,7 @@
 
 # roroph: Philippine Roll-on/Roll-Off (RoRo) Connectivity and Transport Data
 [![CRAN status](https://www.r-pkg.org/badges/version/roroph)](https://CRAN.R-project.org/package=roroph)
-
-[![R-CMD-check](https://github.com/njtalingting/roroph/workflows/R-CMD-check/badge.svg)](https://github.com/njtalingting/roroph/actions)
+[![R-CMD-check](https://github.com/njtalingting/roroph/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtalingting/roroph/actions)
 
 > *Maintainer's Note: `roroph` v0.1.1 only covers the 2024-2026 operational data from MARINA and PPA. However, the maintainer is active in updating the dataset. If you know newly-established inter-island RoRos not included in this version, or have stopped operating, please submit an issue [here.](https://github.com/njtalingting/roroph/issues)*
 
