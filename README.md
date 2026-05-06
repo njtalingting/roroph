@@ -5,10 +5,10 @@
 [![R-CMD-check](https://github.com/njtalingting/roroph/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtalingting/roroph/actions)
 [![DOI](https://img.shields.io/badge/DOI-10.32614/CRAN.package.roroph-blue.svg)](https://doi.org/10.32614/CRAN.package.roroph)
 
-> `roroph` exclusively covers operational data starting 2024 to the present. Prior to 2024, maritime records were often non-digital; this dataset focuses on the current era of synchronized, machine-readable data. Moving forward, I am actively maintaining this dataset to reflect the current maritime landscape. If you are aware of newly established inter-island RoRo routes not yet captured, or routes that have ceased operations since 2024, please submit an issue.
-
 ## Overview 
 The `roroph` package provides a standardized, machine-readable geospatial dataset of the primary and missionary routes comprising the Philippine Nautical Highway System. This includes 108 bidirectional provincial links across the Western, Central, and  Eastern Nautical Highways, complete with GADM-standardized naming,  geospatial coordinates, and metrics such as distance, travel time,  and vessel frequency within the 2024-2026 operations.
+
+> `roroph` covers operational data starting 2024 to the present since prior to 2024, maritime records were often non-digital; this dataset focuses on the current era of synchronized, machine-readable data. Moving forward, I am actively maintaining this dataset to reflect the current maritime landscape. If you are aware of newly established inter-island RoRo routes not yet captured, or routes that have ceased operations since 2024, please submit an issue.
 
 Unlike traditional distance-based spatial models, `roroph` sees the Philippine archipelago through Network Topology. The package provides the necessary edge-list and node-attribute data to move beyond simple Euclidean distance (d) and into Frictional Connectivity, accounting for:
 
