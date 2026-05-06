@@ -8,8 +8,6 @@
 ## Overview 
 The `roroph` package provides a standardized, machine-readable geospatial dataset of the primary and missionary routes comprising the Philippine Nautical Highway System. This includes 108 bidirectional provincial links across the Western, Central, and  Eastern Nautical Highways, complete with GADM-standardized naming,  geospatial coordinates, and metrics such as distance, travel time,  and vessel frequency within the 2024-2026 operations.
 
-> `roroph` covers operational data starting 2024 to the present since prior to 2024, maritime records were often non-digital; this dataset focuses on the current era of synchronized, machine-readable data. Moving forward, I am actively maintaining this dataset to reflect the current maritime landscape. If you are aware of newly established inter-island RoRo routes not yet captured, or routes that have ceased operations since 2024, please submit an issue.
-
 Unlike traditional distance-based spatial models, `roroph` sees the Philippine archipelago through Network Topology. The package provides the necessary edge-list and node-attribute data to move beyond simple Euclidean distance (d) and into Frictional Connectivity, accounting for:
 
 **Node Adjacency:** Directed links between 40+ coastal provinces.
@@ -17,6 +15,9 @@ Unlike traditional distance-based spatial models, `roroph` sees the Philippine a
 **Temporal Friction:** Average travel time in hours (T) across the sea-gap.
 
 **Flow Capacity:** Daily frequency (f), passenger capacity, and cargo volume.
+
+> `roroph` covers operational data starting 2024 to the present since prior to 2024, maritime records were often non-digital; this dataset focuses on the current era of synchronized, machine-readable data. Moving forward, I am actively maintaining this dataset to reflect the current maritime landscape. If you are aware of newly established inter-island RoRo routes not yet captured, or routes that have ceased operations since 2024, please submit an issue.
+
 
 ## Key Features
 **Mapping the Core Philippine Maritime Network:** We can visualize the RoRo links as segments connecting provincial capitals. We can color-code them by their MARINA Highway classification (Western, Central, Eastern, or Missionary) through which the strength of connection is determined by daily frequency travel.
