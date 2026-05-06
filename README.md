@@ -76,5 +76,8 @@ The maritime industry in the Philippines is highly dynamic. While the routes, di
 
 The `roroph` package is an independent development and is separate from and not recognised and approved by MARINA and PPA. The author and maintainer of this package is not affiliated with these orgnanizations but is committed to ensuring that the `roroph` package is compliant with its terms of use.
 
+## Acknowledgments
+The concept for `roroph` was born from technical discussions with [Barry Rowlingson](https://barry.rowlingson.com/) regarding the limitations of purely geometric spatial adjacency in archipelagic contexts. His insights into maritime connectivity provided the inspiration to develop this standardized dataset of the Philippines' nautical highway system as a functional layer for spatial modeling.
+
 ## Community Guidelines
 Feedback, bug reports and feature requests are welcome; file issues or seek support [here](https://github.com/njtalingting/roroph/issues). If you would like to contribute to the package through informing the author of a newly established maritime route that connects provinces, please create a pull request. 
