@@ -3,6 +3,7 @@
 # roroph: Philippine Roll-on/Roll-Off (RoRo) Connectivity and Transport Data
 [![CRAN status](https://www.r-pkg.org/badges/version/roroph)](https://CRAN.R-project.org/package=roroph)
 [![R-CMD-check](https://github.com/njtalingting/roroph/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtalingting/roroph/actions)
+[![DOI](https://img.shields.io/badge/DOI-10.32614%2FCRAN.package.roroph-blue)](https://doi.org/10.32614/CRAN.package.roroph)
 
 ## Overview 
 The `roroph` package provides a standardized, machine-readable geospatial dataset of the primary and missionary routes comprising the Philippine Nautical Highway System. This includes 108 bidirectional provincial links across the Western, Central, and  Eastern Nautical Highways, complete with GADM-standardized naming,  geospatial coordinates, and metrics such as distance, travel time,  and vessel frequency within the 2024-2026 operations.
