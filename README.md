@@ -10,7 +10,7 @@ The `roroph` package provides a standardized, machine-readable geospatial datase
 The package intentionally covers operational data starting 2024 to the present since prior to 2024, maritime records were often non-digital; this dataset focuses on the current era of synchronized, machine-readable data. Moving forward, I am actively maintaining this dataset to reflect the current maritime landscape. If you are aware of newly established inter-island RoRo routes not yet captured, or routes that have ceased operations since 2024, please submit an issue.
 
 ## Key Features
-**Mapping the Core Philippine Maritime Network:** We can visualize the RoRo links as segments connecting provincial capitals. We can color-code them by their MARINA Highway classification (Western, Central, Eastern, or Missionary) through which the strength of connection is determined by daily frequency travel.
+**Mapping the Core Philippine Maritime Network:** We can visualize the RoRo links as segments connecting provincial capitals. We can color-code them by their MARINA Highway classification (Western, Central, Eastern, or Missionary) through which the strength of connection is determined by daily frequency travel. *If you want to recreate this visualization for your own needs with your preferences, you may check [tutorial](https://pinasr.r-universe.dev/articles/roroph/roroph_guide.html).*
 
 <p align="center">
   <img src="man/figures/phroro.png" width="100%">
