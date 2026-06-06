@@ -1,4 +1,4 @@
-<img src="man/figures/logo.png" align="right" height="155" />
+<img src="man/figures/logo.png" align="right" height="160" />
 
 # roroph: Philippine Roll-on/Roll-Off (RoRo) Connectivity and Transport Data
 [![R-CMD-check](https://github.com/njtalingting/roroph/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtalingting/roroph/actions)
