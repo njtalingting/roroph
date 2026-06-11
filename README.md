@@ -6,35 +6,12 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/roroph)](https://CRAN.R-project.org/package=roroph)
 
 ## Overview 
-The `roroph` package provides the necessary framework to transform the Philippine Nautical Highway System into nodes (ports) and edges (distance, travel time,  and vessel frequency) for modeling. This includes 108 bidirectional provincial links across the Western, Central, and  Eastern Nautical Highways, complete with GADM-standardized naming,  geospatial coordinates, and the aofrementioned metrics within the 2024-2026 operations.
+The `roroph` package provides the necessary framework to transform the Philippine Nautical Highway System into nodes (ports) and edges (distance, travel time,  and vessel frequency) for modeling. This includes 108 bidirectional provincial links across the Western, Central, and  Eastern Nautical Highways, complete with GADM-standardized naming,  geospatial coordinates, and the aforementioned metrics within the 2024-2026 operations.
 
-The package intentionally covers operational data starting 2024 to the present since prior to 2024, maritime records were often non-digital; this dataset focuses on the current era of synchronized, machine-readable data. Moving forward, I am actively maintaining this dataset to reflect the current maritime landscape. **If you are aware of newly established inter-island RoRo routes not yet captured, or routes that have ceased operations since 2024, please submit an issue.**
-
-## Key Features
-**Mapping the Core Philippine Maritime Network:** We can visualize the RoRo links as segments connecting provincial capitals. We can color-code them by their MARINA Highway classification (Western, Central, Eastern, or Missionary) through which the strength of connection is determined by daily frequency travel. 
-
-*If you want to recreate/tweak this visualization for your own needs and preferences, you may check [tutorial](https://pinasr.r-universe.dev/articles/roroph/roroph_guide.html).*
-
-<p align="center">
-  <img src="man/figures/phroro.png" width="100%">
-  <br>
-  <i><b>Figure 1:</b> Spatial Connectivity and Daily Frequency of the Philippine RoRo Maritime Network</i>
-</p>
-
-**Statistical Analysis:** Beyond visualization, we can use `roroph` for statistical analyses as it provides necessary variables such as distance, travel time,  and vessel frequency within the 2024-2026 operations. For instance, we could analyze the relationship between distance and vessel capacity among the three major island groups in the Philippines.
-
-<p align="center">
-  <img src="man/figures/analysis.png" width="100%">
-  <br>
-  <i><b>Figure 2:</b> The relationship between distance and vessel capacity in the Philippines' major island groups.</i>
-</p>
-
-**Construction of the Frequency-Based Weights ($W$):** `roroph` provides the raw infrastructure (the Edges) and the native functions to construct Frequency-Weighted Matrices (W). In an archipelagic context, Euclidean distance becomes a limitation as it ignores the physical constraints of the ocean that moves the Philippine economy. By defining the "nearness" of two provinces by the bandwidth of their maritime connection, `roroph` enables researchers to capture the spatial signal found in national price transmission.
-
-While `roroph` defines the Spatial Weights, it is designed to be the primary data-input for the `ArchipelagoEngine` (v0.1.2) package. The engine utilizes these maritime weights to perform Maximum Likelihood Estimation, correcting for the residual spatial bias (p < 0.05) often found in terminal nodes and land-border clusters.
+> **If you are aware of newly established inter-island RoRo routes not yet captured, or routes that have ceased operations since 2024, please submit an [issue.](https://github.com/pinasr/roroph/issues)**
 
 ## Installation
-For v0.1.1:
+You may install the package directly to R:
 ```
 install.packages("roroph")
 ````
@@ -65,6 +42,30 @@ if (requireNamespace("sf", quietly = TRUE)) {
   message("Coordinate validity: ", bbox_check)
 }
 ````
+
+## Key Features
+**Mapping the Core Philippine Maritime Network:** We can visualize the RoRo links as segments connecting provincial capitals. We can color-code them by their MARINA Highway classification (Western, Central, Eastern, or Missionary) through which the strength of connection is determined by daily frequency travel. 
+
+*If you want to recreate/tweak this visualization for your own needs and preferences, you may check [tutorial](https://pinasr.r-universe.dev/articles/roroph/roroph_guide.html).*
+
+<p align="center">
+  <img src="man/figures/phroro.png" width="100%">
+  <br>
+  <i><b>Figure 1:</b> Spatial Connectivity and Daily Frequency of the Philippine RoRo Maritime Network</i>
+</p>
+
+**Statistical Analysis:** Beyond visualization, we can use `roroph` for statistical analyses as it provides necessary variables such as distance, travel time,  and vessel frequency within the 2024-2026 operations. For instance, we could analyze the relationship between distance and vessel capacity among the three major island groups in the Philippines.
+
+<p align="center">
+  <img src="man/figures/analysis.png" width="100%">
+  <br>
+  <i><b>Figure 2:</b> The relationship between distance and vessel capacity in the Philippines' major island groups.</i>
+</p>
+
+**Construction of the Frequency-Based Weights ($W$):** `roroph` provides the raw infrastructure (the Edges) and the native functions to construct Frequency-Weighted Matrices (W). In an archipelagic context, Euclidean distance becomes a limitation as it ignores the physical constraints of the ocean that moves the Philippine economy. By defining the "nearness" of two provinces by the bandwidth of their maritime connection, `roroph` enables researchers to capture the spatial signal found in national price transmission.
+
+While `roroph` defines the Spatial Weights, it is designed to be the primary data-input for the `ArchipelagoEngine` (v0.1.2) package. The engine utilizes these maritime weights to perform Maximum Likelihood Estimation, correcting for the residual spatial bias (p < 0.05) often found in terminal nodes and land-border clusters.
+
 ## Disclaimer
 The maritime industry in the Philippines is highly dynamic. While the routes, distances, and MARINA codes in this package are based on official 2024–2026 administrative reports from the Maritime Industry Authority (MARINA) and the Philippine Ports Authority (PPA), users should note:
 
