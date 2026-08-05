@@ -2,7 +2,6 @@
 
 # roroph: Philippine Roll-on/Roll-Off (RoRo) Connectivity and Transport Data
 [![R-CMD-check](https://github.com/njtalingting/roroph/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/njtalingting/roroph/actions)
-[![CRAN checks](https://badges.cranchecks.info/summary/roroph.svg)](https://cran.r-project.org/web/checks/check_results_roroph.html)
 [![CRAN status](https://www.r-pkg.org/badges/version/roroph)](https://CRAN.R-project.org/package=roroph)
 
 ## Overview 
